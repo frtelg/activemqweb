@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  activemq:
+    container_name: activemq
+    image: antonw/activemq-jmx
+    ports:
+      - "61616:61616" # broker
+      - "61613:61613" # stomp
+      - "8161:8161"  # web
+      - "1099:1099"
+  activemqweb:
+    container_name: activemqweb
+    image: frtelg/activemqweb:latest
+    environment:
+      - AMQ_WEB_CONFIG_LOCATION=/config/activemqweb.config
+    volumes:
+      - "./config:/config"
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    depends_on:
+      - activemq
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    links:
+      - activemq
+

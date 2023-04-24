@@ -1,0 +1,10 @@
+.idea/
+target/
+*.iml
+.DS_Store
+mount/
+log/
+*.log
+frontend/node
+frontend/node_modules
+frontend/build
